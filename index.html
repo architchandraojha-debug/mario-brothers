@@ -23,16 +23,15 @@
     <!-- Join Request Form (always visible for new visitors) -->
     <div id="join-section">
       <h2>Request to Join</h2>
-      <form id="joinForm">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your Email" required>
-        <textarea id="reason" placeholder="Why do you want to join?" required></textarea>
+      <form id="joinForm" action="https://formspree.io/f/mbdwjvnq" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <textarea name="reason" placeholder="Why do you want to join?" required></textarea>
         <button type="submit">Submit Request</button>
       </form>
       <p id="joinMessage"></p>
     </div>
 
-    <!-- PIN Entry (hidden until request is submitted) -->
+    <!-- PIN Entry (hidden until approved) -->
     <div id="pin-section" class="hidden">
       <h2>Enter PIN to Access Group</h2>
       <input type="text" id="pinInput" placeholder="Enter PIN">
@@ -50,35 +49,26 @@
   </main>
 
   <script>
-    // Example PINs
-    const validPins = {
-      "1234": { expires: new Date("2026-05-05T23:59:59") },
-      "5678": { expires: new Date("2026-05-06T23:59:59") }
-    };
+    // Single PIN: TECHNOLOGIA
+    const validPin = "TECHNOLOGIA";
 
     // Handle PIN check
     function checkPin() {
       const pin = document.getElementById("pinInput").value.trim();
-      const pinData = validPins[pin];
-      const now = new Date();
-
-      if (pinData && now < pinData.expires) {
+      if (pin === validPin) {
         document.getElementById("join-section").classList.add("hidden");
         document.getElementById("pin-section").classList.add("hidden");
         document.getElementById("notice-board").classList.remove("hidden");
       } else {
-        document.getElementById("pinMessage").innerText = "Invalid or expired PIN.";
+        document.getElementById("pinMessage").innerText = "Invalid PIN.";
       }
     }
 
-    // Handle Join Request
+    // Show PIN section after form submission
     document.getElementById("joinForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const name = document.getElementById("name").value;
       document.getElementById("joinMessage").innerText =
-        "Thank you, " + name + "! Your request has been recorded. Admin will contact you.";
-      
-      // After request, show PIN section
+        "Request submitted successfully! Admin will review your request.";
       document.getElementById("pin-section").classList.remove("hidden");
       document.getElementById("joinForm").reset();
     });
