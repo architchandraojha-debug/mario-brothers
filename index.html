@@ -9,6 +9,10 @@
     main { padding: 2rem; max-width: 800px; margin: auto; }
     .notice-board { background: #fff; padding: 1rem; border-radius: 5px; margin-top: 1rem; }
     iframe { width: 100%; border: none; }
+    .decision { background: #fff; padding: 1rem; border-radius: 5px; margin-top: 1rem; }
+    .decision h3 { margin-top: 0; }
+    .reject { color: red; font-weight: bold; }
+    .approve { color: green; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -20,13 +24,23 @@
     <!-- Google Form Embed -->
     <div id="join-section">
       <h2>Request to Join</h2>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSckn0LjOMDHdao-aet1J4RKIdNp2Wd7_TfeXazGDIG3DIyO1A/viewform?usp=header/viewform?embedded=true" 
+      <!-- Replace FORM_ID with your actual Google Form embed link -->
+      <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" 
               width="640" height="600" frameborder="0" marginheight="0" marginwidth="0">
         Loading…
       </iframe>
     </div>
 
-    <!-- Notice Board (always visible) -->
+    <!-- Admin Decision Section -->
+    <div id="decision-section" class="decision">
+      <h2>Admin Decisions</h2>
+      <h3>Latest Updates:</h3>
+      <!-- You can manually edit these messages -->
+      <p class="reject">❌ User A: You are rejected.</p>
+      <p class="approve">✅ User B: You are passed. PIN = TECHNOLOGIA</p>
+    </div>
+
+    <!-- Notice Board -->
     <div id="notice-board">
       <h2>Group Notice Board</h2>
       <div class="notice-board">
